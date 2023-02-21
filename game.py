@@ -26,3 +26,16 @@ class Game:
         print("Paper beats Rock and Spock, loses to Scissors and Lizard")
         print("Lizard beats Spock and Paper, loses to Rock and Scissors")
         print("Spock beats Scissors and Rock, loses to Lizard and Paper")
+        
+# Prints a given list in this format 1. Item 2. Item
+    def print_list(self, rpsls_list):
+        index = 1
+        for item in rpsls_list:
+            print(f"{index}. {item}")
+            index += 1
+    
+# Prompts the user to enter in multiplayer or single player and returns a boolean
+    def game_mode_determiner(self):
+        user_input = ""
+
+        while 
