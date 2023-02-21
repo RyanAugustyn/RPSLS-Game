@@ -1,5 +1,9 @@
 class Game: 
-    def __init__(self) -> None:
+    def __init__(self):
+        self.rpsls_list = ["rock", "paper", "scissors", "lizard", "spock"]
+        self.single_player = False
+
+    def run_game():
         pass
 
 
