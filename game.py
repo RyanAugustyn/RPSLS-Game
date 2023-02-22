@@ -7,7 +7,7 @@ class Game:
     def run_game(self):
         self.print_greeting()
         self.print_instructions()
-        self.game_mode_determiner(self.single_player)
+        self.single_player = self.game_mode_determiner()
         self.get_gesture(self.rpsls_list)
 
     #greeting
@@ -37,15 +37,18 @@ class Game:
             index += 1
     
 # Prompts the user to enter in multiplayer or single player and returns a boolean
-    def game_mode_determiner(self, single_player):
+    def game_mode_determiner(self):
         user_input = ""
+        single_player = False
 
         while single_player == False:
             user_input = input("\nPlease enter in Multiplayer or Single Player for game mode: ")
-            if user_input == "multiplayer" or user_input == "single player":
+            if user_input == "single player":
                 single_player = True
             else:
                 single_player = False
+
+        return single_player
 
 # Prompts user for a gesture from the rpsls_list and checks if user entry is in rpsls_list
     def get_gesture(self, rpsls_list):
