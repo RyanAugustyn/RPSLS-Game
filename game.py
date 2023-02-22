@@ -13,18 +13,24 @@ class Game:
         self.print_greeting()
         self.print_instructions()
         self.single_player = self.game_mode_determiner()
+        rounds = self.ask_rounds()
         if self.single_player == False:
             self.player_2 = Human_Player()
-        while self.player_1.round_wins < 2 and self.player_2.round_wins < 2:
+        while self.player_1.round_wins < rounds and self.player_2.round_wins < rounds:
             self.print_list(self.rpsls_list)
             player_choice_1 = self.player_1.get_gesture(self.rpsls_list)
             player_choice_2 = self.player_2.get_gesture(self.rpsls_list)
+            while player_choice_1 == player_choice_2:
+                print("Tie! No points awarded")
+                player_choice_1 = self.player_1.get_gesture(self.rpsls_list)
+                player_choice_2 = self.player_2.get_gesture(self.rpsls_list)
             player_1_win = self.gesture_comparison(player_choice_1, player_choice_2)
             self.who_won_round(player_1_win)
-        if self.player_1.round_wins == 2:
+        if self.player_1.round_wins == rounds:
             print("\n\nPlayer 1 wins the game!!!")
-        if self.player_2.round_wins == 2:
+        else:
             print("\n\nPlayer 2 wins the game!!!")
+
 
 
     #greeting
@@ -34,11 +40,8 @@ class Game:
 
     #print out the rules 
     def print_instructions(self):
-        print("The rules of the game are as follows:")
-        print("Players take turns choose from one of five options,")
-        print("Rock, Paper, Scissors, Lizard, Spock. Once both options are chosen")
-        print("the game determines who wins the round based on the rules below. It ")
-        print("is best out of three rounds, so first player to two wins wins overall.")
+        print("The rules are simple, players take turns choosing one of five getures. The")
+        print("first player to win two rounds wins!\n")
         print("\nThe rules for all of the options are as follows:\n")
         print("Rock beats Scissors, loses to Paper and Spock")
         print("Scissors beats Paper and Lizard, loses to Rock and Spock")
@@ -70,13 +73,21 @@ class Game:
 
         return single_player
 
+#ask user for number of rounds
+    def ask_rounds(self):
+        user_input = input("Please choose the number of rounds needed to win:\n")
+        
+        while user_input.isnumeric() == False:
+            print("Incorrect input")
+            user_input = input("Please choose the number of rounds needed to win:\n")
+
+
+        return int(user_input)
+
 # Performs game logic according to RPSLS rules
     def gesture_comparison(self, choice_1, choice_2):
         choice_1_wins = False
 
-        while choice_1 == choice_2:
-            pass
-    
         if choice_1 == "rock":
             if choice_2 == "paper" or choice_2 == "spock":
                 choice_1_wins = False

@@ -16,5 +16,6 @@ class Human_Player(Player):
                 gesture_is_there = True
             else:
                 gesture_is_there = False
+                print("Incorrect input, please try again")
         
         return user_input.lower()
