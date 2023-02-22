@@ -1,11 +1,12 @@
-class Player:
+from player import Player
+
+class Human_Player(Player):
     def __init__(self):
-        self.round_wins = 0
-        self.gesture_choice = ''
+        super().__init__()
 
 
 
-# Prompts user for a gesture from the rpsls_list
+    # Prompts user for a gesture from the rpsls_list
     def get_gesture(self, rpsls_list):
         user_input = ""
         gesture_is_there = False
@@ -19,4 +20,3 @@ class Player:
                 gesture_is_there = False
         
         return user_input
-

@@ -1,7 +1,12 @@
+from human_player import Human_Player
+from ai_player import AI_Player
+
 class Game: 
     def __init__(self):
         self.rpsls_list = ["rock", "paper", "scissors", "lizard", "spock"]
         self.single_player = False
+        self.player_1 = Human_Player()
+        self.player_2 = AI_Player()
 
 # Runs the RPSLS game
     def run_game(self):
@@ -50,17 +55,7 @@ class Game:
 
         return single_player
 
-# Prompts user for a gesture from the rpsls_list and checks if user entry is in rpsls_list
-    def get_gesture(self, rpsls_list):
-        user_input = ""
-        gesture_is_there = False
-
-        while gesture_is_there == False:
-            self.print_list(rpsls_list)
-            user_input = input("Please enter in a gesture from the given list: ")
-            if user_input in rpsls_list:
-                gesture_is_there = True
-            else:
-                gesture_is_there = False
-        
-        return user_input
+#Set players equal to either human or ai 
+    def set_players(self, single_player):
+        if single_player == False:
+            self.player_2 = Human_Player()
