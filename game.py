@@ -3,10 +3,12 @@ class Game:
         self.rpsls_list = ["rock", "paper", "scissors", "lizard", "spock"]
         self.single_player = False
 
-    def run_game():
-        pass
-
-
+# Runs the RPSLS game
+    def run_game(self):
+        self.print_greeting()
+        self.print_instructions()
+        self.game_mode_determiner()
+        self.get_gester()
 
     #greeting
     def print_greeting(self):
@@ -35,7 +37,42 @@ class Game:
             index += 1
     
 # Prompts the user to enter in multiplayer or single player and returns a boolean
-    def game_mode_determiner(self):
+    def game_mode_determiner(self, single_player):
         user_input = ""
 
-        while 
+        while single_player == False:
+            user_input = input("Please enter in Multiplayer or Single Player for game mode: ")
+            if user_input.lower != "multiplayer" or user_input.lower != "single player":
+                single_player = False
+            else:
+                single_player = True
+
+# Prompts user for a gester from the rpsls_list
+    def get_gester(self, rpsls_list):
+        user_input = ""
+        gester_is_there = False
+
+        while gester_is_there == False:
+            self.print_list(rpsls_list)
+            user_input = input("Please enter in a gester from the given list: ")
+            if self.check_gester(user_input) == True:
+                gester_is_there = True
+            else:
+                gester_is_there = False
+        
+        return user_input
+
+
+# Checks to see if the gester passed is in the rpsls_list
+    def check_gester(self, gester, rpsls_list):
+        gester_is_there = False
+
+        if gester_is_there == False:
+            for item in rpsls_list:
+                if item == gester.lower:
+                    gester_is_there = True
+                    break
+                elif item != gester.lower:
+                    gester_is_there = False
+
+        return gester_is_there
