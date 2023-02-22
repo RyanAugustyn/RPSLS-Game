@@ -13,7 +13,19 @@ class Game:
         self.print_greeting()
         self.print_instructions()
         self.single_player = self.game_mode_determiner()
-        self.get_gesture(self.rpsls_list)
+        if self.single_player == False:
+            self.player_2 = Human_Player()
+        while self.player_1.round_wins < 2 and self.player_2.round_wins < 2:
+            self.print_list(self.rpsls_list)
+            player_choice_1 = self.player_1.get_gesture(self.rpsls_list)
+            player_choice_2 = self.player_2.get_gesture(self.rpsls_list)
+            player_1_win = self.gesture_comparison(player_choice_1, player_choice_2)
+            self.who_won_round(player_1_win)
+        if self.player_1.round_wins == 2:
+            print("\n\nPlayer 1 wins the game!!!")
+        if self.player_2.round_wins == 2:
+            print("\n\nPlayer 2 wins the game!!!")
+
 
     #greeting
     def print_greeting(self):
@@ -46,16 +58,58 @@ class Game:
         user_input = ""
         single_player = False
 
+
         while single_player == False:
             user_input = input("\nPlease enter in Multiplayer or Single Player for game mode: ")
             if user_input == "single player":
                 single_player = True
+            elif user_input == "multiplayer":
+                return single_player
             else:
-                single_player = False
+                print("Incorrect input")
 
         return single_player
 
-#Set players equal to either human or ai 
-    def set_players(self, single_player):
-        if single_player == False:
-            self.player_2 = Human_Player()
+# Performs game logic according to RPSLS rules
+    def gesture_comparison(self, choice_1, choice_2):
+        choice_1_wins = False
+
+        while choice_1 == choice_2:
+            pass
+    
+        if choice_1 == "rock":
+            if choice_2 == "paper" or choice_2 == "spock":
+                choice_1_wins = False
+            else:
+                choice_1_wins = True
+        elif choice_1 == "scissors":
+            if choice_2 == "rock" or choice_2 == "spock":
+                choice_1_wins = False
+            else:
+                choice_1_wins = True
+        elif choice_1 == "paper":
+            if choice_2 == "scissors" or choice_2 == "lizard":
+                choice_1_wins = False
+            else:
+                choice_1_wins = True
+        elif choice_1 == "lizard":
+            if choice_2 == "rock" or choice_2 == "scissors":
+                choice_1_wins = False
+            else:
+                choice_1_wins = True
+        elif choice_1 == "spock":
+            if choice_2 == "lizard" or choice_2 == "paper":
+                choice_1_wins = False
+            else:
+                choice_1_wins = True
+
+        return choice_1_wins
+    
+# Tells user if player_1 or player_2 won
+    def who_won_round(self, is_winner):
+        if is_winner == True:
+            print("\nPlayer 1 won this round!")
+            self.player_1.round_wins += 1
+        else:
+            print("\nPlayer 2 won this round!")
+            self.player_2.round_wins += 1

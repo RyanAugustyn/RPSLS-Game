@@ -11,7 +11,6 @@ class Player:
         gesture_is_there = False
 
         while gesture_is_there == False:
-            self.print_list(rpsls_list)
             user_input = input("Please enter in a gesture from the given list: ")
             if user_input in rpsls_list:
                 gesture_is_there = True
